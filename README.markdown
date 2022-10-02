@@ -31,12 +31,12 @@ func main() {
 
 # Status
 
-[x] - v2/sendsms
-[] - v2/adultverify
-[] - v2/chargesms 
-[] - v2/sendbinsms 
-[] - v2/sendwappush 
-[] - v2/operator_lookup
+- [x] - v2/sendsms
+- [] - v2/adultverify
+- [] - v2/chargesms 
+- [] - v2/sendbinsms 
+- [] - v2/sendwappush 
+- [] - v2/operator_lookup
 
 # Command line client / Release
 
