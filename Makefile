@@ -4,7 +4,7 @@ build:
 	go build -o bin/fonix main.go
 
 test:
-	go test -v ./...
+	go test -v ./... -count=1
 
 deps:
 	go get
