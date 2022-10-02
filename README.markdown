@@ -1,6 +1,6 @@
 # Fonix Client
 
-This is a `golang` v2 API client for Fonix (fonix.com)[fonix.com] sms gateway. 
+This is a `golang` Fonix v2 API client for (fonix.com)[fonix.com] sms gateway. 
 
 # Usage
 
@@ -11,20 +11,21 @@ example:
 package main
 
 import (
-    "context"
-    "github.com/JakubOboza/fonix"
+	"context"
+	"fmt"
+	fonix "github.com/JakubOboza/fonix/client"
 )
 
 func main() {
-  client = fonix.New("MY-API_KEY")
-  response, err := client.SendSms(context.Background(), &fonix.SmsParams{Originator: "889988", Numbers: "4474123456789", Body: "Hello!"})
+	client := fonix.New("MY-API_KEY")
+	response, err := client.SendSms(context.Background(), &fonix.SmsParams{Originator: "889988", Numbers: "4474123456789", Body: "Hello!"})
 
-  if err != nil {
-    fmt.Println(err) 
-    return
-  }
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
- fmt.Println(response)
+	fmt.Println(response)
 }
 
 ```
