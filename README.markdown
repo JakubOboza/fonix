@@ -31,12 +31,23 @@ func main() {
 
 # Status
 
+Client Lib:
+
 - [x] - v2/sendsms
 - [ ] - v2/adultverify
 - [ ] - v2/chargesms 
 - [ ] - v2/sendbinsms 
 - [ ] - v2/sendwappush 
 - [ ] - v2/operator_lookup
+
+CLI Client:
+
+- [x] - fonix sendsms
+- [ ] - fonix adultverify
+- [ ] - fonix chargesms 
+- [ ] - fonix sendbinsms 
+- [ ] - fonix sendwappush 
+- [ ] - fonix operator_lookup
 
 # Command line client / Release
 
