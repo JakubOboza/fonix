@@ -4,8 +4,11 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"context"
 	"fmt"
+	"os"
 
+	"github.com/JakubOboza/fonix/client"
 	"github.com/spf13/cobra"
 )
 
@@ -16,20 +19,77 @@ var sendsmsCmd = &cobra.Command{
 	Long: `Use this subcommand to send bulk/free sms to a number 
 	using your API keys via fonix gateway`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("sendsms called")
+		apiKey := os.Getenv("API_KEY")
+
+		flagApiKey, err := cmd.Flags().GetString("url")
+		if err == nil && flagApiKey != "" {
+			apiKey = flagApiKey
+		}
+
+		// params
+
+		originator, err := cmd.Flags().GetString("originator")
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		body, err := cmd.Flags().GetString("body")
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		numbers, err := cmd.Flags().GetString("numbers")
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		dummy, err := cmd.Flags().GetString("dummy")
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		params := &client.SmsParams{
+			Originator: originator,
+			Body:       body,
+			Numbers:    numbers,
+			Dummy:      dummy,
+		}
+
+		fonixClient := client.New(apiKey)
+
+		result, err := fonixClient.SendSms(context.Background(), params)
+
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
+		fmt.Println("======Success======")
+		fmt.Println("Guid: ", result.SuccessData.TxGuid)
+		fmt.Println("Numbers: ", result.SuccessData.Numbers)
+		fmt.Println("Parts: ", result.SuccessData.SmsParts)
+		fmt.Println("Encoding: ", result.SuccessData.Encoding)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(sendsmsCmd)
 
-	// Here you will define your flags and configuration settings.
+	sendsmsCmd.Flags().StringP("apikey", "k", "", "apikey for the service eg: --apikey=live:myKey123456XYZ")
+	sendsmsCmd.Flags().StringP("body", "b", "", "body of the text message eg: --body=hello")
+	sendsmsCmd.Flags().StringP("originator", "o", "", "originator of the message eg: --originator=889988")
+	sendsmsCmd.Flags().StringP("numbers", "n", "", "numbers to send the sms to eg: --numbers=4474123456778")
+	sendsmsCmd.Flags().StringP("dummy", "d", "", "dummy flag yes or no, you can skip it. dummy=yes will make fonix not send sms but mock respond eg: --dummy=yes")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// sendsmsCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// sendsmsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	sendsmsCmd.MarkFlagRequired("body")
+	sendsmsCmd.MarkFlagRequired("originator")
+	sendsmsCmd.MarkFlagRequired("numbers")
 }
