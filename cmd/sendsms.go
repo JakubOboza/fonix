@@ -65,6 +65,11 @@ var sendsmsCmd = &cobra.Command{
 
 		fonixClient := client.New(apiKey)
 
+		newBaseUrl, _ := cmd.Flags().GetString("baseurl")
+		if newBaseUrl != "" {
+			fonixClient.SetBaseURL(newBaseUrl)
+		}
+
 		result, err := fonixClient.SendSms(context.Background(), params)
 
 		if err != nil {
@@ -92,4 +97,6 @@ func init() {
 	sendsmsCmd.MarkFlagRequired("body")
 	sendsmsCmd.MarkFlagRequired("originator")
 	sendsmsCmd.MarkFlagRequired("numbers")
+
+	sendsmsCmd.Flags().StringP("baseurl", "u", "", "base url of fonix/sonar that isnt default. --baseurl=https://sonar.fonix.io")
 }
