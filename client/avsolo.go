@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"net/http"
+	"net/url"
+	"path"
 	"strings"
 )
 
@@ -70,11 +72,20 @@ type SuccessAvSoloResponseWrapper struct {
 
 func (client *Client) AvSolo(ctx context.Context, avParams *AvParams) (*SuccessAvSoloResponse, error) {
 
-	apiUrl, err := client.apiUrlPath(V2_AVSOLO)
+	//TODO: fix it
+	//Bit hacky but AvSolo has by default a different endpoint
+	baseUrl := DEFAULT_URL_AVSOLO
+	if client.baseURL != DEFAULT_URL {
+		baseUrl = client.baseURL
+	}
 
+	u, err := url.Parse(baseUrl)
 	if err != nil {
 		return nil, err
 	}
+
+	u.Path = path.Join(u.Path, V2_AVSOLO)
+	apiUrl := u.String()
 
 	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(avParams.ToParams()))
 

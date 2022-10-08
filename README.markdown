@@ -45,11 +45,11 @@ Client Lib:
 CLI Client:
 
 - [x] - fonix sendsms
-- [ ] - fonix adultverify
-- [ ] - fonix chargesms 
+- [x] - fonix adultverify (sync/async)
+- [x] - fonix chargesms 
 - [ ] - fonix sendbinsms 
 - [ ] - fonix sendwappush 
-- [ ] - fonix operator_lookup
+- [x] - fonix operator_lookup
 
 # Command line client / Release
 
