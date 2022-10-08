@@ -17,6 +17,7 @@ const (
 	V2_SENDWAPPUSH    = "v2/sendwappush"
 	V2_ADULTVERIFY    = "v2/adultverify"
 	V2_OPERATORLOOKUP = "v2/operator_lookup"
+	V2_AVSOLO         = "v2/avsolo"
 )
 
 var (

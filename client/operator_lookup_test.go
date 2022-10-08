@@ -10,7 +10,7 @@ import (
 
 //API MOCK RESPONSE TESTS
 
-//SendSms
+//OperatorLookup
 
 func TestOperatorLookupSuccess(t *testing.T) {
 

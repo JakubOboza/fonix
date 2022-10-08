@@ -36,6 +36,7 @@ Client Lib:
 
 - [x] - v2/sendsms
 - [x] - v2/adultverify
+- [x] - v2/avsolo
 - [x] - v2/chargesms 
 - [x] - v2/sendbinsms 
 - [x] - v2/sendwappush 
