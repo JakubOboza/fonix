@@ -10,10 +10,11 @@ import (
 )
 
 const (
-	DEFAULT_URL   = "https://sonar.fonix.io"
-	V2_SENDSMS    = "v2/sendsms"
-	V2_SENDSMSBIN = "v2/sendbinsms"
-	V2_CHARGESMS  = "v2/chargesms"
+	DEFAULT_URL    = "https://sonar.fonix.io"
+	V2_SENDSMS     = "v2/sendsms"
+	V2_SENDSMSBIN  = "v2/sendbinsms"
+	V2_CHARGESMS   = "v2/chargesms"
+	V2_SENDWAPPUSH = "v2/sendwappush"
 )
 
 var (
@@ -44,6 +45,12 @@ func (c *Client) SetBaseURL(baseURL string) *Client {
 func (c *Client) SetHttpClient(httpClient *http.Client) *Client {
 	c.httpClient = httpClient
 	return c
+}
+
+// Generic Types
+
+type ApiParams interface {
+	ToParams() string
 }
 
 // API Implementation
