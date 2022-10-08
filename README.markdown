@@ -39,7 +39,7 @@ Client Lib:
 - [x] - v2/chargesms 
 - [x] - v2/sendbinsms 
 - [x] - v2/sendwappush 
-- [ ] - v2/operator_lookup
+- [x] - v2/operator_lookup
 
 CLI Client:
 

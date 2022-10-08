@@ -10,12 +10,13 @@ import (
 )
 
 const (
-	DEFAULT_URL    = "https://sonar.fonix.io"
-	V2_SENDSMS     = "v2/sendsms"
-	V2_SENDSMSBIN  = "v2/sendbinsms"
-	V2_CHARGESMS   = "v2/chargesms"
-	V2_SENDWAPPUSH = "v2/sendwappush"
-	V2_ADULTVERIFY = "v2/adultverify"
+	DEFAULT_URL       = "https://sonar.fonix.io"
+	V2_SENDSMS        = "v2/sendsms"
+	V2_SENDSMSBIN     = "v2/sendbinsms"
+	V2_CHARGESMS      = "v2/chargesms"
+	V2_SENDWAPPUSH    = "v2/sendwappush"
+	V2_ADULTVERIFY    = "v2/adultverify"
+	V2_OPERATORLOOKUP = "v2/operator_lookup"
 )
 
 var (

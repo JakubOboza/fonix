@@ -7,6 +7,12 @@ import (
 	"strings"
 )
 
+// Async AV check, You need to implement handler to get response!
+// https://www.fonix.com/documentation/messaging-sms-billing-api/
+// Request will look like this
+// POST /path/chargereport HTTP/1.1
+// IFVERSION=201001&OPERATOR=eetmo-uk&MONUMBER=447932111222&GUID=7CDEB38F-4370-18FD-D7CE-329F21B99209&AV=VERIFIED
+
 type AvParams struct {
 	NetworkRetry string
 	Numbers      string
