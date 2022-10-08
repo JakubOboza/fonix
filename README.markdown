@@ -47,8 +47,8 @@ CLI Client:
 - [x] - fonix sendsms
 - [x] - fonix adultverify (sync/async)
 - [x] - fonix chargesms 
-- [ ] - fonix sendbinsms 
-- [ ] - fonix sendwappush 
+- [x] - fonix sendbinsms 
+- [x] - fonix sendwappush 
 - [x] - fonix operator_lookup
 
 # Command line client / Release
