@@ -78,10 +78,10 @@ var sendsmsCmd = &cobra.Command{
 		}
 
 		fmt.Println("======Success======")
-		fmt.Println("Guid: ", result.SuccessData.TxGuid)
-		fmt.Println("Numbers: ", result.SuccessData.Numbers)
-		fmt.Println("Parts: ", result.SuccessData.SmsParts)
-		fmt.Println("Encoding: ", result.SuccessData.Encoding)
+		fmt.Println("Guid: ", result.TxGuid)
+		fmt.Println("Numbers: ", result.Numbers)
+		fmt.Println("Parts: ", result.SmsParts)
+		fmt.Println("Encoding: ", result.Encoding)
 	},
 }
 

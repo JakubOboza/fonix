@@ -72,8 +72,8 @@ func TestSendSmsSuccess(t *testing.T) {
 		t.Errorf("Should have success response but got nil")
 	}
 
-	if result.SuccessData.TxGuid != "7CDEB38F-4370-18FD-D7CE-329F21B99209" {
-		t.Errorf("Expected status to be confirmed but got '%v'", result.SuccessData.TxGuid)
+	if result.TxGuid != "7CDEB38F-4370-18FD-D7CE-329F21B99209" {
+		t.Errorf("Expected status to be confirmed but got '%v'", result.TxGuid)
 	}
 
 }

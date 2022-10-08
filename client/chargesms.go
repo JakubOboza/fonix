@@ -11,15 +11,15 @@ import (
 // -d BODY=Welcome%20Home
 // -d DUMMY=yes
 
-type SuccessChargeResponseContent struct {
+type SuccessChargeResponse struct {
 	TxGuid   string `json:"txguid"`
 	Numbers  string `json:"numbers"`
 	Price    string `json:"price"`
 	Encoding string `json:"encoding"`
 }
 
-type SuccessChargeResponse struct {
-	SuccessData SuccessChargeResponseContent `json:"success"`
+type SuccessChargeResponseWrapper struct {
+	SuccessData SuccessChargeResponse `json:"success"`
 }
 
 func (client *Client) ChargeSms(ctx context.Context, smsParams *SmsParams) (*SuccessChargeResponse, error) {
@@ -39,11 +39,11 @@ func (client *Client) ChargeSms(ctx context.Context, smsParams *SmsParams) (*Suc
 	req = req.WithContext(ctx)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	response := SuccessChargeResponse{}
+	response := SuccessChargeResponseWrapper{}
 
 	if err = client.sendRequest(req, &response); err != nil {
 		return nil, err
 	}
 
-	return &response, nil
+	return &response.SuccessData, nil
 }

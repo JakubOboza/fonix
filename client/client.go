@@ -61,15 +61,15 @@ func (errRes *errorResponse) ToError() error {
 	return fmt.Errorf("failure! paramater: %s error: %s", errRes.ErrorData.Parameter, errRes.ErrorData.Failcode)
 }
 
-type SuccessResponseContent struct {
+type SuccessResponse struct {
 	TxGuid   string `json:"txguid"`
 	Numbers  string `json:"numbers"`
 	SmsParts string `json:"smsparts"`
 	Encoding string `json:"encoding"`
 }
 
-type SuccessResponse struct {
-	SuccessData SuccessResponseContent `json:"success"`
+type SuccessResponseWrapper struct {
+	SuccessData SuccessResponse `json:"success"`
 }
 
 func (client *Client) sendRequest(req *http.Request, response interface{}) error {

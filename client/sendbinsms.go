@@ -47,11 +47,11 @@ func (client *Client) SendBinSms(ctx context.Context, smsParams *SmsBinParams) (
 	req = req.WithContext(ctx)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	response := SuccessResponse{}
+	response := SuccessResponseWrapper{}
 
 	if err = client.sendRequest(req, &response); err != nil {
 		return nil, err
 	}
 
-	return &response, nil
+	return &response.SuccessData, nil
 }

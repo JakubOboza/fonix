@@ -72,12 +72,12 @@ func TestChargeSmsSuccess(t *testing.T) {
 		t.Errorf("Should have success response but got nil")
 	}
 
-	if result.SuccessData.TxGuid != "7CDEB38F-4370-18FD-D7CE-329F21B99209" {
-		t.Errorf("Expected status to be confirmed but got '%v'", result.SuccessData.TxGuid)
+	if result.TxGuid != "7CDEB38F-4370-18FD-D7CE-329F21B99209" {
+		t.Errorf("Expected status to be confirmed but got '%v'", result.TxGuid)
 	}
 
-	if result.SuccessData.Price != "50" {
-		t.Errorf("Expected price to be 50 but got '%v'", result.SuccessData.Price)
+	if result.Price != "50" {
+		t.Errorf("Expected price to be 50 but got '%v'", result.Price)
 	}
 
 }
