@@ -7,32 +7,32 @@ import (
 	"strings"
 )
 
-type SmsParams struct {
+type SmsBinParams struct {
 	Originator string
 	Numbers    string
-	Body       string
+	BinBody    string
 	Dummy      string
 }
 
 // -d ORIGINATOR=84988
 // -d NUMBERS=447111222333
-// -d BODY=Welcome%20Home
+// -d BINBODY=....
 // -d DUMMY=yes
 
-func (smsParams *SmsParams) ToParams() string {
+func (smsParams *SmsBinParams) ToParams() string {
 	data := url.Values{}
 	data.Set("ORIGINATOR", smsParams.Originator)
 	data.Set("NUMBERS", smsParams.Numbers)
-	data.Set("BODY", smsParams.Body)
+	data.Set("BINBODY", smsParams.BinBody)
 	if strings.ToUpper(smsParams.Dummy) == "YES" {
 		data.Set("DUMMY", "yes")
 	}
 	return data.Encode()
 }
 
-func (client *Client) SendSms(ctx context.Context, smsParams *SmsParams) (*SuccessResponse, error) {
+func (client *Client) SendBinSms(ctx context.Context, smsParams *SmsBinParams) (*SuccessResponse, error) {
 
-	apiUrl, err := client.apiUrlPath(V2_SENDSMS)
+	apiUrl, err := client.apiUrlPath(V2_SENDSMSBIN)
 
 	if err != nil {
 		return nil, err

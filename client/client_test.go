@@ -37,3 +37,30 @@ func TestClientNew(t *testing.T) {
 	}
 
 }
+
+func TestClientApiPathGenerationt(t *testing.T) {
+	fonixClient := New("This-Is-A-Test-Key")
+
+	apiUrl1, err := fonixClient.apiUrlPath(V2_SENDSMS)
+
+	if err != nil {
+		t.Errorf("didn't expect error but got '%v'", err)
+	}
+
+	if apiUrl1 != "https://sonar.fonix.io/v2/sendsms" {
+		t.Errorf("expected correct path but got '%v'", apiUrl1)
+	}
+
+	fonixClient.SetBaseURL("https://lol.troll.test/")
+
+	apiUrl2, err := fonixClient.apiUrlPath(V2_SENDSMS)
+
+	if err != nil {
+		t.Errorf("didn't expect error but got '%v'", err)
+	}
+
+	if apiUrl2 != "https://lol.troll.test/v2/sendsms" {
+		t.Errorf("expected correct path but got '%v'", apiUrl2)
+	}
+
+}

@@ -4,12 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
+	"path"
 	"time"
 )
 
 const (
-	DEFAULT_URL = "https://sonar.fonix.io"
-	V2_SENDSMS  = "v2/sendsms"
+	DEFAULT_URL   = "https://sonar.fonix.io"
+	V2_SENDSMS    = "v2/sendsms"
+	V2_SENDSMSBIN = "v2/sendbinsms"
+	V2_CHARGESMS  = "v2/chargesms"
 )
 
 var (
@@ -99,4 +103,15 @@ func (client *Client) sendRequest(req *http.Request, response interface{}) error
 	}
 
 	return nil
+}
+
+func (client *Client) apiUrlPath(endPointPath string) (string, error) {
+	u, err := url.Parse(client.baseURL)
+	if err != nil {
+		return "", err
+	}
+
+	u.Path = path.Join(u.Path, endPointPath)
+	apiUrl := u.String()
+	return apiUrl, nil
 }

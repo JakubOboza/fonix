@@ -36,8 +36,8 @@ Client Lib:
 
 - [x] - v2/sendsms
 - [ ] - v2/adultverify
-- [ ] - v2/chargesms 
-- [ ] - v2/sendbinsms 
+- [x] - v2/chargesms 
+- [x] - v2/sendbinsms 
 - [ ] - v2/sendwappush 
 - [ ] - v2/operator_lookup
 
