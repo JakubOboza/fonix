@@ -69,6 +69,18 @@ func TestOperatorLookupSuccess(t *testing.T) {
 		t.Errorf("Should have success response but got nil")
 	}
 
+	if result.Mcc != "234" {
+		t.Errorf("Expected mcc to be 234 but got '%v'", result.Mcc)
+	}
+
+	if result.Mnc != "15" {
+		t.Errorf("Expected mnc to be 15 but got '%v'", result.Mnc)
+	}
+
+	if result.Operator != "voda-uk" {
+		t.Errorf("Expected operator to be 'voda-uk' but got '%v'", result.Operator)
+	}
+
 }
 
 func TestOperatorLookupFailure(t *testing.T) {
