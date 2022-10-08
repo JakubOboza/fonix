@@ -15,6 +15,7 @@ const (
 	V2_SENDSMSBIN  = "v2/sendbinsms"
 	V2_CHARGESMS   = "v2/chargesms"
 	V2_SENDWAPPUSH = "v2/sendwappush"
+	V2_ADULTVERIFY = "v2/adultverify"
 )
 
 var (

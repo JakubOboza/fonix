@@ -10,24 +10,22 @@ import (
 
 //API MOCK RESPONSE TESTS
 
-//ChargeSms
+//AdultVerify
 
-func TestChargeSmsSuccess(t *testing.T) {
+func TestAdultVerifySuccess(t *testing.T) {
 
-	expectedRequestBody := `BODY=Hey+man+this+is+a+test&NUMBERS=447123456767890&ORIGINATOR=1234567`
+	expectedRequestBody := `NETWORKRETRY=no&NUMBERS=447123456767890`
 
 	response := `{
 		"success": {
 			"txguid": "7CDEB38F-4370-18FD-D7CE-329F21B99209",
-			"numbers": "1",
-			"price": "50",
-			"encoding": "gsm"
+			"numbers": "1"
 		}
 	}`
 
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 
-		expectedURL := "/v2/chargesms"
+		expectedURL := "/v2/adultverify"
 
 		if req.URL.String() != expectedURL {
 			t.Errorf("Expected URL '%s' but got '%s'", expectedURL, req.URL.String())
@@ -56,13 +54,12 @@ func TestChargeSmsSuccess(t *testing.T) {
 
 	ctx := context.Background()
 
-	smsParams := &SmsParams{
-		Originator: "1234567",
-		Numbers:    "447123456767890",
-		Body:       "Hey man this is a test",
+	avParams := &AvParams{
+		Numbers:      "447123456767890",
+		NetworkRetry: "no",
 	}
 
-	result, err := c.ChargeSms(ctx, smsParams)
+	result, err := c.AdultVerify(ctx, avParams)
 
 	if err != nil {
 		t.Errorf("Didn't expect error but got '%v'", err)
@@ -76,26 +73,22 @@ func TestChargeSmsSuccess(t *testing.T) {
 		t.Errorf("Expected status to be confirmed but got '%v'", result.TxGuid)
 	}
 
-	if result.Price != "50" {
-		t.Errorf("Expected price to be 50 but got '%v'", result.Price)
-	}
-
 }
 
-func TestChargeSmsFailure(t *testing.T) {
+func TestAdultVerifyFailure(t *testing.T) {
 
-	expectedRequestBody := `BODY=Hey+man+this+is+a+test&NUMBERS=447123456767890&ORIGINATOR=1234567`
+	expectedRequestBody := `NETWORKRETRY=no&NUMBERS=447123456767890`
 
 	response := `{
 		"failure": {
-			"parameter": "body",
-			"failcode": "TOO_MANY_CHARACTERS"
+			"parameter": "numbers",
+			"failcode": "IS_INVALID"
 		}
 	}`
 
 	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 
-		expectedURL := "/v2/chargesms"
+		expectedURL := "/v2/adultverify"
 
 		if req.URL.String() != expectedURL {
 			t.Errorf("Expected URL '%s' but got '%s'", expectedURL, req.URL.String())
@@ -125,15 +118,14 @@ func TestChargeSmsFailure(t *testing.T) {
 
 	ctx := context.Background()
 
-	smsParams := &SmsParams{
-		Originator: "1234567",
-		Numbers:    "447123456767890",
-		Body:       "Hey man this is a test",
+	avParams := &AvParams{
+		Numbers:      "447123456767890",
+		NetworkRetry: "no",
 	}
 
-	result, err := c.ChargeSms(ctx, smsParams)
+	result, err := c.AdultVerify(ctx, avParams)
 
-	if err.Error() != "failure! paramater: body error: TOO_MANY_CHARACTERS" {
+	if err.Error() != "failure! paramater: numbers error: IS_INVALID" {
 		t.Errorf("Expected error but got '%v'", err)
 	}
 

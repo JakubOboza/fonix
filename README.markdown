@@ -35,10 +35,10 @@ func main() {
 Client Lib:
 
 - [x] - v2/sendsms
-- [ ] - v2/adultverify
+- [x] - v2/adultverify
 - [x] - v2/chargesms 
 - [x] - v2/sendbinsms 
-- [ ] - v2/sendwappush 
+- [x] - v2/sendwappush 
 - [ ] - v2/operator_lookup
 
 CLI Client:
