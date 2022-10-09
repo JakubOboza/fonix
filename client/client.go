@@ -28,21 +28,27 @@ var (
 )
 
 type Client struct {
-	apiKey     string
-	baseURL    string
-	httpClient *http.Client
+	apiKey        string
+	baseURL       string
+	baseURLAvSolo string
+	httpClient    *http.Client
 }
 
 func New(apiKey string) *Client {
 	httpClient := &http.Client{
 		Timeout: CLIENT_TIMEOUT,
 	}
-	return &Client{apiKey: apiKey, baseURL: DEFAULT_URL, httpClient: httpClient}
+	return &Client{apiKey: apiKey, baseURL: DEFAULT_URL, httpClient: httpClient, baseURLAvSolo: DEFAULT_URL_AVSOLO}
 }
 
 // Configuration
 func (c *Client) SetBaseURL(baseURL string) *Client {
 	c.baseURL = baseURL
+	return c
+}
+
+func (c *Client) SetBaseAvSoloURL(baseAvSoloURL string) *Client {
+	c.baseURLAvSolo = baseAvSoloURL
 	return c
 }
 
@@ -117,7 +123,11 @@ func (client *Client) sendRequest(req *http.Request, response interface{}) error
 }
 
 func (client *Client) apiUrlPath(endPointPath string) (string, error) {
-	u, err := url.Parse(client.baseURL)
+	return client.apiBaseUrlAndUrlPath(client.baseURL, endPointPath)
+}
+
+func (client *Client) apiBaseUrlAndUrlPath(baseURL, endPointPath string) (string, error) {
+	u, err := url.Parse(baseURL)
 	if err != nil {
 		return "", err
 	}

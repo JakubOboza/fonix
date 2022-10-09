@@ -64,3 +64,18 @@ func TestClientApiPathGenerationt(t *testing.T) {
 	}
 
 }
+
+func TestClientApiBaseAndUrlPathGenerationt(t *testing.T) {
+	fonixClient := New("This-Is-A-Test-Key")
+
+	apiUrl, err := fonixClient.apiBaseUrlAndUrlPath("http://test.sub.domain.lambdacu.be/", V2_SENDSMS)
+
+	if err != nil {
+		t.Errorf("didn't expect error but got '%v'", err)
+	}
+
+	if apiUrl != "http://test.sub.domain.lambdacu.be/v2/sendsms" {
+		t.Errorf("expected correct path but got '%v'", apiUrl)
+	}
+
+}

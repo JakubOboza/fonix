@@ -64,11 +64,12 @@ var adultverifyCmd = &cobra.Command{
 		fonixClient := client.New(apiKey)
 
 		newBaseUrl, _ := cmd.Flags().GetString("baseurl")
-		if newBaseUrl != "" {
-			fonixClient.SetBaseURL(newBaseUrl)
-		}
 
 		if async {
+
+			if newBaseUrl != "" {
+				fonixClient.SetBaseURL(newBaseUrl)
+			}
 
 			result, err := fonixClient.AdultVerify(context.Background(), params)
 
@@ -82,6 +83,10 @@ var adultverifyCmd = &cobra.Command{
 			fmt.Println("Numbers: ", result.Numbers)
 
 		} else {
+
+			if newBaseUrl != "" {
+				fonixClient.SetBaseAvSoloURL(newBaseUrl)
+			}
 
 			result, err := fonixClient.AvSolo(context.Background(), params)
 

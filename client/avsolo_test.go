@@ -51,7 +51,7 @@ func TestAvSoloVerifiedSuccess(t *testing.T) {
 	defer server.Close()
 
 	c := New("ApiKeyThatWeUseForTest")
-	c.SetHttpClient(server.Client()).SetBaseURL(server.URL)
+	c.SetHttpClient(server.Client()).SetBaseAvSoloURL(server.URL)
 
 	ctx := context.Background()
 
@@ -127,7 +127,7 @@ func TestAvSoloFailure(t *testing.T) {
 	defer server.Close()
 
 	c := New("ApiKeyThatWeUseForTest")
-	c.SetHttpClient(server.Client()).SetBaseURL(server.URL)
+	c.SetHttpClient(server.Client()).SetBaseAvSoloURL(server.URL)
 
 	ctx := context.Background()
 
@@ -188,7 +188,7 @@ func TestAvSoloNotVerifiedSuccess(t *testing.T) {
 	defer server.Close()
 
 	c := New("ApiKeyThatWeUseForTest")
-	c.SetHttpClient(server.Client()).SetBaseURL(server.URL)
+	c.SetHttpClient(server.Client()).SetBaseAvSoloURL(server.URL)
 
 	ctx := context.Background()
 
@@ -266,7 +266,7 @@ func TestAvSoloPendingSuccess(t *testing.T) {
 	defer server.Close()
 
 	c := New("ApiKeyThatWeUseForTest")
-	c.SetHttpClient(server.Client()).SetBaseURL(server.URL)
+	c.SetHttpClient(server.Client()).SetBaseAvSoloURL(server.URL)
 
 	ctx := context.Background()
 
@@ -344,7 +344,7 @@ func TestAvSoloUnknownSuccess(t *testing.T) {
 	defer server.Close()
 
 	c := New("ApiKeyThatWeUseForTest")
-	c.SetHttpClient(server.Client()).SetBaseURL(server.URL)
+	c.SetHttpClient(server.Client()).SetBaseAvSoloURL(server.URL)
 
 	ctx := context.Background()
 
