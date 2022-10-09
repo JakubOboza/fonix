@@ -11,6 +11,12 @@ This is a `golang` Fonix v2 API client for (fonix.com)[fonix.com] sms gateway.
 
 ## Usage in Go <a name="usagego"></a>
 
+Import the library package eg.
+```
+import "github.com/JakubOboza/fonix/client"
+```
+
+Send Sms using fonix client in golang:
 
 example:
 ```
@@ -33,6 +39,29 @@ func main() {
 
 	fmt.Println(response)
 }
+
+```
+
+Api Errors, if you get error from fonix api you can try casting it to `*ApiError` to get more info like `StatusCode` access to http response or the `ErrorData` object with parsed error response which might contain info about `Parameter` or `Failcode`
+
+example:
+
+```
+...
+
+	response, err := client.SendSms(context.Background(), &fonix.SmsParams{Originator: "889988", Numbers: "4474123456789", Body: "Hello!"})
+
+	if err != nil {
+        apiError, ok := err.(*ApiError)
+
+        if ok {
+            fmt.Println("http response status code:", apiError.StatusCode)
+            fmt.Ptinln("issue with field: ",  apiError.ErrorData.Parameter)
+        }
+	}
+
+    ...
+
 
 ```
 

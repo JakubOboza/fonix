@@ -99,7 +99,7 @@ func (client *Client) sendRequest(req *http.Request, response interface{}) error
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
 		var errRes errorResponse
 		if err = json.NewDecoder(res.Body).Decode(&errRes); err == nil {
-			return errRes.ToError() //TODO needs better formatting or custom error
+			return wrapApiError(errRes, res)
 		}
 		return fmt.Errorf("unknown error, status code: %d", res.StatusCode)
 	}
