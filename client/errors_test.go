@@ -89,3 +89,28 @@ func TestCustomApiError(t *testing.T) {
 	}
 
 }
+
+func TestCustomApiErrorWrapError(t *testing.T) {
+
+	errRes := errorResponse{ErrorData: errorResponseContent{
+		Parameter: "body",
+		Failcode:  "IS_EMPTY",
+	}}
+
+	apiError1 := wrapApiError(errRes, nil)
+
+	if apiError1.StatusCode != 0 {
+		t.Errorf("expected StatusCode to be 0 without response but got %v", apiError1.StatusCode)
+	}
+
+	res := &http.Response{
+		StatusCode: http.StatusBadRequest,
+	}
+
+	apiError2 := wrapApiError(errRes, res)
+
+	if apiError2.StatusCode != 400 {
+		t.Errorf("expected StatusCode to be 400 without response but got %v", apiError2.StatusCode)
+	}
+
+}

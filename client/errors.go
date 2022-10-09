@@ -12,7 +12,11 @@ type ApiError struct {
 }
 
 func wrapApiError(errRes errorResponse, res *http.Response) *ApiError {
-	return &ApiError{ErrorData: errRes.ErrorData, StatusCode: res.StatusCode, HttpResponse: res}
+	httpResponseStatusCode := 0
+	if res != nil {
+		httpResponseStatusCode = res.StatusCode
+	}
+	return &ApiError{ErrorData: errRes.ErrorData, StatusCode: httpResponseStatusCode, HttpResponse: res}
 }
 
 func (ar *ApiError) Error() string {
