@@ -2,9 +2,15 @@
 
 This is a `golang` Fonix v2 API client for (fonix.com)[fonix.com] sms gateway. 
 
-# Usage
+# Table of Contents
+1. [Usage (golang code)](#usagego)
+2. [Usage (command line client)](#usagecli)
+3. [Status](#status)
+4. [Building & Compiling](#build)
+5. [Testing](#test)
 
-WORK IN PROGRESS
+## Usage in Go <a name="usagego"></a>
+
 
 example:
 ```
@@ -30,7 +36,38 @@ func main() {
 
 ```
 
-# Status
+## Usage in command line <a name="usagecli"></a>
+
+Library contains both command line client available via `release` and library to integrate in your code.
+
+It can be compiled or downloaded as binary and use to interact with fonix API
+
+To use cmd interface please download the release or build it from source `make`. This should produce `./bin/fonix` or in case of binary `fonix` executable.
+
+To interact with client call
+```
+./fonix --help
+```
+
+This will show you all command you can use. 
+
+To send bulk sms you can use the `sendsms` command. It requires API_KEY, body, originator and numbers parammeters.
+
+example:
+```
+API_KEY=live_xyz ./fonix sendsms -b test -d no -n 447111222333 -o 84988
+```
+
+Api key can be set as ENVironment variable or as param to command `-k` or `--apikey=` eg. `--apikey=live:myKey123456XYZ`
+
+Each other param can be checked by doing
+
+```
+./fonix sendsms --help
+```
+
+
+# Compatibility Status <a name="status"></a>
 
 Client Lib:
 
@@ -51,15 +88,11 @@ CLI Client:
 - [x] - fonix sendwappush 
 - [x] - fonix operator_lookup
 
-# Command line client / Release
-
-Library contains both command line client available via `release` and library to integrate in your code.
-
-# Build
+# Build <a name="build"></a>
 
 To build development version just type `make`. 
 To build release for all platforms `make release`
 
-# Test
+# Test <a name="test"></a>
 
 To run entire suit of tests `make test`
