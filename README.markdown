@@ -1,6 +1,6 @@
 # Fonix Client
 
-This is a `golang` Fonix v2 API client for (fonix.com)[fonix.com] sms gateway. 
+This is a `golang` Fonix v2 API client for [fonix.com](fonix.com) sms gateway. 
 
 # Table of Contents
 1. [Usage (golang code)](#usagego)
