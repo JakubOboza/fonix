@@ -1,8 +1,13 @@
 package client
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
+)
+
+var (
+	ErrUnknownValue = errors.New("unknown value")
 )
 
 type ApiError struct {

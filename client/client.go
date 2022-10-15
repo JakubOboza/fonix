@@ -10,15 +10,17 @@ import (
 )
 
 const (
-	DEFAULT_URL        = "https://sonar.fonix.io"
-	DEFAULT_URL_AVSOLO = "https://avsolo.fonix.io"
-	V2_SENDSMS         = "v2/sendsms"
-	V2_SENDSMSBIN      = "v2/sendbinsms"
-	V2_CHARGESMS       = "v2/chargesms"
-	V2_SENDWAPPUSH     = "v2/sendwappush"
-	V2_ADULTVERIFY     = "v2/adultverify"
-	V2_OPERATORLOOKUP  = "v2/operator_lookup"
-	V2_AVSOLO          = "v2/avsolo"
+	DEFAULT_URL         = "https://sonar.fonix.io"
+	DEFAULT_URL_AVSOLO  = "https://avsolo.fonix.io"
+	DEFAULT_URL_KYCSOLO = "https://kycsolo.fonix.io"
+	V2_SENDSMS          = "v2/sendsms"
+	V2_SENDSMSBIN       = "v2/sendbinsms"
+	V2_CHARGESMS        = "v2/chargesms"
+	V2_SENDWAPPUSH      = "v2/sendwappush"
+	V2_ADULTVERIFY      = "v2/adultverify"
+	V2_OPERATORLOOKUP   = "v2/operator_lookup"
+	V2_AVSOLO           = "v2/avsolo"
+	V2_KYCSOLO          = "v2/kyc"
 )
 
 var (
@@ -28,17 +30,18 @@ var (
 )
 
 type Client struct {
-	apiKey        string
-	baseURL       string
-	baseURLAvSolo string
-	httpClient    *http.Client
+	apiKey         string
+	baseURL        string
+	baseURLAvSolo  string
+	baseURLKycSolo string
+	httpClient     *http.Client
 }
 
 func New(apiKey string) *Client {
 	httpClient := &http.Client{
 		Timeout: CLIENT_TIMEOUT,
 	}
-	return &Client{apiKey: apiKey, baseURL: DEFAULT_URL, httpClient: httpClient, baseURLAvSolo: DEFAULT_URL_AVSOLO}
+	return &Client{apiKey: apiKey, baseURL: DEFAULT_URL, httpClient: httpClient, baseURLAvSolo: DEFAULT_URL_AVSOLO, baseURLKycSolo: DEFAULT_URL_KYCSOLO}
 }
 
 // Configuration
@@ -49,6 +52,11 @@ func (c *Client) SetBaseURL(baseURL string) *Client {
 
 func (c *Client) SetBaseAvSoloURL(baseAvSoloURL string) *Client {
 	c.baseURLAvSolo = baseAvSoloURL
+	return c
+}
+
+func (c *Client) SetBaseKycSoloURL(baseKycSoloURL string) *Client {
+	c.baseURLKycSolo = baseKycSoloURL
 	return c
 }
 
@@ -66,8 +74,10 @@ type ApiParams interface {
 // API Implementation
 
 type errorResponseContent struct {
-	Parameter string `json:"parameter"`
-	Failcode  string `json:"failcode"`
+	Parameter  string `json:"parameter"`
+	Failcode   string `json:"failcode"`
+	StatusCode string `json:"statuscode"`
+	StatusText string `json:"statustext"`
 }
 
 type errorResponse struct {

@@ -107,6 +107,7 @@ Client Lib:
 - [x] - v2/sendbinsms 
 - [x] - v2/sendwappush 
 - [x] - v2/operator_lookup
+- [x] - v2/kycsolo
 
 CLI Client:
 

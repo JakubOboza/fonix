@@ -114,3 +114,78 @@ func TestCustomApiErrorWrapError(t *testing.T) {
 	}
 
 }
+
+func TestClientWithAllErrorFields(t *testing.T) {
+	response := `{
+		"failure":{
+			"ifversion":"201001",
+			"statuscode":"WINDOW_EXCEEDED",
+			"statustext":"Too many requests made to the server in parallel"
+		}
+	}`
+
+	expectedRequestBody := `NUMBERS=447123456767890&ORIGINATOR=1234567&PUSHLINK=http%3A%2F%2Fgoogle.com%2Flink%2Fto%2Fpush.wap&PUSHTITLE=amazing+Test+Promo`
+
+	server := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+
+		expectedURL := "/v2/sendwappush"
+
+		if req.URL.String() != expectedURL {
+			t.Errorf("Expected URL '%s' but got '%s'", expectedURL, req.URL.String())
+		}
+
+		if req.Method != "POST" {
+			t.Errorf("Was expecting POST method but got %v", req.Method)
+		}
+
+		if req.Header.Get("X-API-KEY") != "ApiKeyThatWeUseForTest" {
+			t.Errorf("Was expecting API KEY HEADER to be set correct but wasn't")
+		}
+
+		requestBody, _ := ioutil.ReadAll(req.Body)
+
+		if string(requestBody) != expectedRequestBody {
+			t.Errorf("Was expecting correct body but different \nEXP:\t'%v'\n GOT:\t'%v'", expectedRequestBody, string(requestBody))
+		}
+
+		rw.WriteHeader(http.StatusBadRequest)
+		rw.Write([]byte(response))
+	}))
+	defer server.Close()
+
+	c := New("ApiKeyThatWeUseForTest")
+	c.SetHttpClient(server.Client()).SetBaseURL(server.URL)
+
+	ctx := context.Background()
+
+	smsWapParams := &SmsWapParams{
+		Originator: "1234567",
+		Numbers:    "447123456767890",
+		PushTitle:  "amazing Test Promo",
+		PushLink:   "http://google.com/link/to/push.wap",
+	}
+
+	result, err := c.SendWapPush(ctx, smsWapParams)
+
+	if result != nil {
+		t.Errorf("Should not have success response but got '%v'", result)
+	}
+
+	apiError, ok := err.(*ApiError)
+
+	if ok != true {
+		t.Errorf("returned error should be castable to *ApiError but wasnt")
+	}
+
+	if ok {
+		if apiError.ErrorData.StatusCode != "WINDOW_EXCEEDED" {
+			t.Errorf("expected StatusCode to be WINDOW_EXCEEDED but got %v", apiError.ErrorData.StatusCode)
+		}
+
+		if apiError.ErrorData.StatusText != "Too many requests made to the server in parallel" {
+			t.Errorf("expected FailCode to be 'Too many requests made to the server in parallel' but got '%v'", apiError.ErrorData.StatusText)
+		}
+
+	}
+
+}
