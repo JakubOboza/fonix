@@ -47,8 +47,6 @@ Api Errors, if you get error from fonix api you can try casting it to `*ApiError
 example:
 
 ```
-...
-
 	response, err := client.SendSms(context.Background(), &fonix.SmsParams{Originator: "889988", Numbers: "4474123456789", Body: "Hello!"})
 
 	if err != nil {
@@ -59,9 +57,6 @@ example:
             fmt.Ptinln("issue with field: ",  apiError.ErrorData.Parameter)
         }
 	}
-
-    ...
-
 
 ```
 
