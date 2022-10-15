@@ -47,17 +47,16 @@ Api Errors, if you get error from fonix api you can try casting it to `*ApiError
 example:
 
 ```
-	response, err := client.SendSms(context.Background(), &fonix.SmsParams{Originator: "889988", Numbers: "4474123456789", Body: "Hello!"})
+response, err := client.SendSms(context.Background(), &fonix.SmsParams{Originator: "889988", Numbers: "4474123456789", Body: "Hello!"})
 
-	if err != nil {
-        apiError, ok := err.(*ApiError)
+if err != nil {
+    apiError, ok := err.(*ApiError)
 
-        if ok {
-            fmt.Println("http response status code:", apiError.StatusCode)
-            fmt.Ptinln("issue with field: ",  apiError.ErrorData.Parameter)
-        }
-	}
-
+    if ok {
+        fmt.Println("http response status code:", apiError.StatusCode)
+        fmt.Ptinln("issue with field: ",  apiError.ErrorData.Parameter)
+    }
+}
 ```
 
 ## Usage in command line <a name="usagecli"></a>
