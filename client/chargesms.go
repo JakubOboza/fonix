@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strings"
 )
@@ -16,6 +17,10 @@ type SuccessChargeResponse struct {
 	Numbers  string `json:"numbers"`
 	Price    string `json:"price"`
 	Encoding string `json:"encoding"`
+}
+
+func (sr *SuccessChargeResponse) ToConsole() string {
+	return fmt.Sprintf("======Success======\nGuid: %s\nNumbers: %s\nPrice: %s\nEncoding: %s\n", sr.TxGuid, sr.Numbers, sr.Price, sr.Encoding)
 }
 
 type SuccessChargeResponseWrapper struct {

@@ -76,11 +76,19 @@ var chargesmsCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Println("======Success======")
-		fmt.Println("Guid: ", result.TxGuid)
-		fmt.Println("Numbers: ", result.Numbers)
-		fmt.Println("Price: ", result.Price)
-		fmt.Println("Encoding: ", result.Encoding)
+		format, err := cmd.Flags().GetString("format")
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+		out, err := client.Output(result, format)
+
+		fmt.Println(out)
+
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
 	},
 }
 
@@ -98,4 +106,5 @@ func init() {
 	chargesmsCmd.MarkFlagRequired("numbers")
 
 	chargesmsCmd.Flags().StringP("baseurl", "u", "", "base url of fonix/sonar that isnt default. --baseurl=https://sonar.fonix.io")
+	chargesmsCmd.Flags().StringP("format", "f", "", "output format eg: --format=json")
 }

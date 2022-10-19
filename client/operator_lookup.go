@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -28,6 +29,10 @@ type SuccessOperatorLookupResponse struct {
 	Mnc      string `json:"mnc"`
 	Mcc      string `json:"mcc"`
 	Operator string `json:"operator"`
+}
+
+func (sr *SuccessOperatorLookupResponse) ToConsole() string {
+	return fmt.Sprintf("======Operator Lookup Result======\nOperator: %s\nMnc: %s\nMcc: %s\n", sr.Operator, sr.Mnc, sr.Mcc)
 }
 
 type SuccessOperatorLookupResponseWrapper struct {

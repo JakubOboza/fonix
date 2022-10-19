@@ -95,6 +95,10 @@ type SuccessResponse struct {
 	Encoding string `json:"encoding"`
 }
 
+func (sr *SuccessResponse) ToConsole() string {
+	return fmt.Sprintf("======Success======\nGuid: %s\nNumbers: %s\nParts: %s\nEncoding: %s\n", sr.TxGuid, sr.Numbers, sr.SmsParts, sr.Encoding)
+}
+
 type SuccessResponseWrapper struct {
 	SuccessData SuccessResponse `json:"success"`
 }

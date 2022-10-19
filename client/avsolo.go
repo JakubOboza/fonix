@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"strings"
 )
@@ -66,6 +67,10 @@ type SuccessAvSoloResponseWrapper struct {
 	NotVerifiedData *SuccessAvSoloResponse `json:"not_verified"`
 	UnknownData     *SuccessAvSoloResponse `json:"unknown"`
 	PendingData     *SuccessAvSoloResponse `json:"pending"`
+}
+
+func (sr *SuccessAvSoloResponse) ToConsole() string {
+	return fmt.Sprintf("======Av Result======\nGuid: %s\nOperator: %s\nStatus: %s\nIfVersion: %s\n", sr.Guid, sr.Operator, sr.Status, sr.IfVersion)
 }
 
 func (client *Client) AvSolo(ctx context.Context, avParams *AvParams) (*SuccessAvSoloResponse, error) {

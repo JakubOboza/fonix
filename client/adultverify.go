@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -40,6 +41,10 @@ func (avParams *AvParams) ToParams() string {
 type SuccessAvResponse struct {
 	TxGuid  string `json:"txguid"`
 	Numbers string `json:"numbers"`
+}
+
+func (sr *SuccessAvResponse) ToConsole() string {
+	return fmt.Sprintf("======Response======\nGuid: %s\nNumbers: %s\n", sr.TxGuid, sr.Numbers)
 }
 
 type SuccessAvResponseWrapper struct {

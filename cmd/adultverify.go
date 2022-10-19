@@ -65,6 +65,12 @@ var adultverifyCmd = &cobra.Command{
 
 		newBaseUrl, _ := cmd.Flags().GetString("baseurl")
 
+		format, err := cmd.Flags().GetString("format")
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
 		if async {
 
 			if newBaseUrl != "" {
@@ -78,9 +84,14 @@ var adultverifyCmd = &cobra.Command{
 				return
 			}
 
-			fmt.Println("======Response======")
-			fmt.Println("Guid: ", result.TxGuid)
-			fmt.Println("Numbers: ", result.Numbers)
+			out, err := client.Output(result, format)
+
+			fmt.Println(out)
+
+			if err != nil {
+				fmt.Println("Error:", err)
+				return
+			}
 
 		} else {
 
@@ -95,11 +106,14 @@ var adultverifyCmd = &cobra.Command{
 				return
 			}
 
-			fmt.Println("======Av Result======")
-			fmt.Println("Guid: ", result.Guid)
-			fmt.Println("Operator: ", result.Operator)
-			fmt.Println("Status: ", result.Status)
-			fmt.Println("IfVersion: ", result.IfVersion)
+			out, err := client.Output(result, format)
+
+			fmt.Println(out)
+
+			if err != nil {
+				fmt.Println("Error:", err)
+				return
+			}
 
 		}
 	},
@@ -119,4 +133,5 @@ func init() {
 	sendsmsCmd.MarkFlagRequired("numbers")
 
 	adultverifyCmd.Flags().StringP("baseurl", "u", "", "base url of fonix/sonar that isnt default. --baseurl=https://sonar.fonix.io")
+	adultverifyCmd.Flags().StringP("format", "f", "", "output format eg: --format=json")
 }

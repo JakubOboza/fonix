@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -37,6 +38,10 @@ type SuccessWapResponse struct {
 	TxGuid   string `json:"txguid"`
 	Numbers  string `json:"numbers"`
 	SmsParts string `json:"smsparts"`
+}
+
+func (sr *SuccessWapResponse) ToConsole() string {
+	return fmt.Sprintf("======Success======\nGuid: %s\nNumbers: %s\nParts: %s\n", sr.TxGuid, sr.Numbers, sr.SmsParts)
 }
 
 type SuccessWapResponseWrapper struct {

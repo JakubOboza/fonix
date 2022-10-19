@@ -60,10 +60,19 @@ var operatorlookupCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Println("======Operator Lookup Result======")
-		fmt.Println("Operator: ", result.Operator)
-		fmt.Println("Mnc: ", result.Mnc)
-		fmt.Println("Mcc: ", result.Mcc)
+		format, err := cmd.Flags().GetString("format")
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+		out, err := client.Output(result, format)
+
+		fmt.Println(out)
+
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
 	},
 }
 
@@ -77,5 +86,6 @@ func init() {
 	operatorlookupCmd.MarkFlagRequired("number")
 
 	operatorlookupCmd.Flags().StringP("baseurl", "u", "", "base url of fonix/sonar that isnt default. --baseurl=https://sonar.fonix.io")
+	operatorlookupCmd.Flags().StringP("format", "f", "", "output format eg: --format=json")
 
 }
