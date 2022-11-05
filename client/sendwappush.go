@@ -20,6 +20,7 @@ type SmsWapParams struct {
 	PushTitle  string
 	PushLink   string
 	Dummy      string
+	RequestID  string
 }
 
 func (smsParams *SmsWapParams) ToParams() string {
@@ -30,6 +31,9 @@ func (smsParams *SmsWapParams) ToParams() string {
 	data.Set("PUSHLINK", smsParams.PushLink)
 	if strings.ToUpper(smsParams.Dummy) == "YES" {
 		data.Set("DUMMY", "yes")
+	}
+	if len(smsParams.RequestID) > 0 {
+		data.Set("REQUESTID", smsParams.RequestID)
 	}
 	return data.Encode()
 }

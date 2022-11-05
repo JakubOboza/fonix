@@ -12,6 +12,7 @@ type SmsBinParams struct {
 	Numbers    string
 	BinBody    string
 	Dummy      string
+	RequestID  string
 }
 
 // -d ORIGINATOR=84988
@@ -26,6 +27,9 @@ func (smsParams *SmsBinParams) ToParams() string {
 	data.Set("BINBODY", smsParams.BinBody)
 	if strings.ToUpper(smsParams.Dummy) == "YES" {
 		data.Set("DUMMY", "yes")
+	}
+	if len(smsParams.RequestID) > 0 {
+		data.Set("REQUESTID", smsParams.RequestID)
 	}
 	return data.Encode()
 }

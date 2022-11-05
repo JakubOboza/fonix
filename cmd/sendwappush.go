@@ -62,12 +62,20 @@ var sendwappushCmd = &cobra.Command{
 			return
 		}
 
+		rid, err := cmd.Flags().GetString("requestid")
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		params := &client.SmsWapParams{
 			Originator: originator,
 			PushTitle:  pushTitle,
 			PushLink:   pushLink,
 			Numbers:    numbers,
 			Dummy:      dummy,
+			RequestID:  rid,
 		}
 
 		fonixClient := client.New(apiKey)
@@ -110,6 +118,7 @@ func init() {
 	sendwappushCmd.Flags().StringP("originator", "o", "", "originator of the message eg: --originator=889988")
 	sendwappushCmd.Flags().StringP("numbers", "n", "", "numbers to send the sms to eg: --numbers=4474123456778")
 	sendwappushCmd.Flags().StringP("dummy", "d", "", "dummy flag yes or no, you can skip it. dummy=yes will make fonix not send sms but mock respond eg: --dummy=yes")
+	sendwappushCmd.Flags().StringP("requestid", "r", "", "setup request id for the request, this will be resend in DR. Max 80 chars eg: --requestid=RAA12233222")
 
 	sendwappushCmd.MarkFlagRequired("title")
 	sendwappushCmd.MarkFlagRequired("link")

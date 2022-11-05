@@ -12,12 +12,14 @@ type SmsParams struct {
 	Numbers    string
 	Body       string
 	Dummy      string
+	RequestID  string
 }
 
 // -d ORIGINATOR=84988
 // -d NUMBERS=447111222333
 // -d BODY=Welcome%20Home
 // -d DUMMY=yes
+// -d REQUESTID=F21B992E9257936E3D2F7CDEB38F217C
 
 func (smsParams *SmsParams) ToParams() string {
 	data := url.Values{}
@@ -26,6 +28,9 @@ func (smsParams *SmsParams) ToParams() string {
 	data.Set("BODY", smsParams.Body)
 	if strings.ToUpper(smsParams.Dummy) == "YES" {
 		data.Set("DUMMY", "yes")
+	}
+	if len(smsParams.RequestID) > 0 {
+		data.Set("REQUESTID", smsParams.RequestID)
 	}
 	return data.Encode()
 }

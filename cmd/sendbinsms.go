@@ -55,11 +55,19 @@ var sendbinsmsCmd = &cobra.Command{
 			return
 		}
 
+		rid, err := cmd.Flags().GetString("requestid")
+
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		params := &client.SmsBinParams{
 			Originator: originator,
 			BinBody:    binBody,
 			Numbers:    numbers,
 			Dummy:      dummy,
+			RequestID:  rid,
 		}
 
 		fonixClient := client.New(apiKey)
@@ -101,6 +109,7 @@ func init() {
 	sendbinsmsCmd.Flags().StringP("originator", "o", "", "originator of the message eg: --originator=889988")
 	sendbinsmsCmd.Flags().StringP("numbers", "n", "", "numbers to send the sms to eg: --numbers=4474123456778")
 	sendbinsmsCmd.Flags().StringP("dummy", "d", "", "dummy flag yes or no, you can skip it. dummy=yes will make fonix not send sms but mock respond eg: --dummy=yes")
+	sendbinsmsCmd.Flags().StringP("requestid", "r", "", "setup request id for the request, this will be resend in DR. Max 80 chars eg: --requestid=RAA12233222")
 
 	sendbinsmsCmd.MarkFlagRequired("binbody")
 	sendbinsmsCmd.MarkFlagRequired("originator")
