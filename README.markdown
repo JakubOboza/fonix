@@ -59,6 +59,40 @@ if err != nil {
 }
 ```
 
+## MO/DR handling / integration
+
+Example MO handler can be implemented like this:
+```
+func MoHandler(w http.ResponseWriter, r *http.Request) {
+
+	if err := r.ParseForm(); err != nil {
+		fmt.Fprintf(w, "ParseForm() err: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+	}
+
+	ifversion := r.FormValue("IFVERSION")
+	monumber := r.FormValue("MONUMBER")
+	operator := r.FormValue("OPERATOR")
+	destination := r.FormValue("DESTINATION")
+	body := r.FormValue("BODY")
+	receiveTime := r.FormValue("RECEIVETIME")
+	guid := r.FormValue("GUID")
+	price := r.FormValue("PRICE")
+	requestID := r.FormValue("REQUESTID")
+
+	fmt.Printf("IFVERSION: %s\nMONUMBER: %s\nOPERATOR: %s\nDESTINATION: %s\nBODY: %s\nRECEIVETIME: %s\nGUID: %s\nPRICE: %s\nREQUESTID: %s\n\n", ifversion, monumber, operator, destination, body, receiveTime, guid, price, requestID)
+
+	w.WriteHeader(http.StatusOK)
+}
+```
+
+CLI client has mock mo and dr handler in command `./bin/fonix modrmock --port=6688` that hosts handlers on paths:
+
+```
+MOs => /mock/mosms
+DRs => /mock/drs
+```
+
 ## Usage in command line <a name="usagecli"></a>
 
 Library contains both command line client available via `release` and library to integrate in your code.
