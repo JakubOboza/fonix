@@ -59,7 +59,7 @@ if err != nil {
 }
 ```
 
-## MO/DR handling / integration
+## MO/DR handling ~ integration
 
 Example MO handler can be implemented like this:
 ```
