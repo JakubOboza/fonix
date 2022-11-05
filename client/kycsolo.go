@@ -73,7 +73,7 @@ func (client *Client) KycSolo(ctx context.Context, kycParams *KycSoloParams) (*K
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(kycParams.ToParams()))
+	req, err := http.NewRequestWithContext(ctx, "POST", apiUrl, strings.NewReader(kycParams.ToParams()))
 
 	if err != nil {
 		return nil, err

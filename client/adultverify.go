@@ -59,7 +59,7 @@ func (client *Client) AdultVerify(ctx context.Context, avParams *AvParams) (*Suc
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(avParams.ToParams()))
+	req, err := http.NewRequestWithContext(ctx, "POST", apiUrl, strings.NewReader(avParams.ToParams()))
 
 	if err != nil {
 		return nil, err

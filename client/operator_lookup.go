@@ -47,7 +47,7 @@ func (client *Client) OperatorLookup(ctx context.Context, oplkParams *OperatorLo
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", apiUrl, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", apiUrl, nil)
 
 	if err != nil {
 		return nil, err

@@ -35,7 +35,7 @@ func (client *Client) ChargeSms(ctx context.Context, smsParams *SmsParams) (*Suc
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(smsParams.ToParams()))
+	req, err := http.NewRequestWithContext(ctx, "POST", apiUrl, strings.NewReader(smsParams.ToParams()))
 
 	if err != nil {
 		return nil, err

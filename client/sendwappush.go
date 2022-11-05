@@ -60,7 +60,7 @@ func (client *Client) SendWapPush(ctx context.Context, smsParams *SmsWapParams) 
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(smsParams.ToParams()))
+	req, err := http.NewRequestWithContext(ctx, "POST", apiUrl, strings.NewReader(smsParams.ToParams()))
 
 	if err != nil {
 		return nil, err
