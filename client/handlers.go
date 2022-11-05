@@ -63,8 +63,13 @@ func DrHandler(w http.ResponseWriter, r *http.Request) {
 	guid := r.FormValue("GUID")
 	price := r.FormValue("PRICE")
 	requestID := r.FormValue("REQUESTID")
+	duration := r.FormValue("DURATION")
+	retryCount := r.FormValue("RETRYCOUNT")
+	statusCode := r.FormValue("STATUSCODE")
+	statusTime := r.FormValue("STATUSTIME")
+	statusText := r.FormValue("STATUSTEXT")
 
-	fmt.Printf("IFVERSION: %s\nMONUMBER: %s\nOPERATOR: %s\nDESTINATION: %s\nBODY: %s\nRECEIVETIME: %s\nGUID: %s\nPRICE: %s\nREQUESTID: %s\n\n", ifversion, monumber, operator, destination, body, receiveTime, guid, price, requestID)
+	fmt.Printf("IFVERSION: %s\nMONUMBER: %s\nOPERATOR: %s\nDESTINATION: %s\nBODY: %s\nRECEIVETIME: %s\nGUID: %s\nPRICE: %s\nREQUESTID: %s\nDURATION: %s\nRETRYCOUNT: %s\nSTATUSCODE: %s\nSTATUSTIME: %s\nSTATUSTEXT: %s\n\n", ifversion, monumber, operator, destination, body, receiveTime, guid, price, requestID, duration, retryCount, statusCode, statusTime, statusText)
 
 	w.WriteHeader(http.StatusOK)
 }
