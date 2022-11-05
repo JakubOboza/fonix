@@ -86,6 +86,8 @@ func MoHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
+Mock DR/MO handler is implemented [HERE](https://github.com/JakubOboza/fonix/blob/main/client/handlers.go)
+
 CLI client has mock mo and dr handler in command `./bin/fonix modrmock --port=6688` that hosts handlers on paths:
 
 ```
