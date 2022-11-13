@@ -23,6 +23,7 @@ const (
 	V2_AVSOLO           = "v2/avsolo"
 	V2_KYCSOLO          = "v2/kyc"
 	V2_REFUND           = "v2/refund"
+	V2_CHARGEMOBILE     = "v2/chargemobile"
 )
 
 var (
