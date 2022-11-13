@@ -138,6 +138,8 @@ Client Lib:
 - [x] - v2/sendwappush 
 - [x] - v2/operator_lookup
 - [x] - v2/kycsolo
+- [x] - v2/refund
+- [ ] - v2/chargemobile
 
 CLI Client:
 
@@ -147,6 +149,8 @@ CLI Client:
 - [x] - fonix sendbinsms 
 - [x] - fonix sendwappush 
 - [x] - fonix operator_lookup
+- [ ] - fonix refund
+- [ ] - fonix chargemobile
 
 # Build <a name="build"></a>
 

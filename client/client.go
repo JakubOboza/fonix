@@ -13,6 +13,7 @@ const (
 	DEFAULT_URL         = "https://sonar.fonix.io"
 	DEFAULT_URL_AVSOLO  = "https://avsolo.fonix.io"
 	DEFAULT_URL_KYCSOLO = "https://kycsolo.fonix.io"
+	DEFAULT_URL_REFUND  = "https://refund.fonix.io"
 	V2_SENDSMS          = "v2/sendsms"
 	V2_SENDSMSBIN       = "v2/sendbinsms"
 	V2_CHARGESMS        = "v2/chargesms"
@@ -21,6 +22,7 @@ const (
 	V2_OPERATORLOOKUP   = "v2/operator_lookup"
 	V2_AVSOLO           = "v2/avsolo"
 	V2_KYCSOLO          = "v2/kyc"
+	V2_REFUND           = "v2/refund"
 )
 
 var (
@@ -34,6 +36,7 @@ type Client struct {
 	baseURL        string
 	baseURLAvSolo  string
 	baseURLKycSolo string
+	baseURLRefund  string
 	httpClient     *http.Client
 }
 
@@ -41,7 +44,7 @@ func New(apiKey string) *Client {
 	httpClient := &http.Client{
 		Timeout: CLIENT_TIMEOUT,
 	}
-	return &Client{apiKey: apiKey, baseURL: DEFAULT_URL, httpClient: httpClient, baseURLAvSolo: DEFAULT_URL_AVSOLO, baseURLKycSolo: DEFAULT_URL_KYCSOLO}
+	return &Client{apiKey: apiKey, baseURL: DEFAULT_URL, httpClient: httpClient, baseURLAvSolo: DEFAULT_URL_AVSOLO, baseURLKycSolo: DEFAULT_URL_KYCSOLO, baseURLRefund: DEFAULT_URL_REFUND}
 }
 
 // Configuration
@@ -57,6 +60,11 @@ func (c *Client) SetBaseAvSoloURL(baseAvSoloURL string) *Client {
 
 func (c *Client) SetBaseKycSoloURL(baseKycSoloURL string) *Client {
 	c.baseURLKycSolo = baseKycSoloURL
+	return c
+}
+
+func (c *Client) SetBaseRefundURL(baseRefundURL string) *Client {
+	c.baseURLRefund = baseRefundURL
 	return c
 }
 
