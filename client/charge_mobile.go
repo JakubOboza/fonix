@@ -20,6 +20,7 @@ import (
 // -d CHARGESILENT=no
 // -d BODY=Thanks%20for%20playing%20lucky%20roulette.%20This%20message%20is%20charged%20%C2%A31.
 // -d DUMMY=yes
+// -d smsfallback=yes
 
 type ChargeMobileParams struct {
 	Numbers           string
@@ -31,6 +32,7 @@ type ChargeMobileParams struct {
 	ChargeSilent      string //default to "no"
 	Body              string
 	Dummy             string
+	SmsFallback       string // only include if "yes"
 }
 
 func (chargeParams *ChargeMobileParams) ToParams() string {
@@ -49,6 +51,9 @@ func (chargeParams *ChargeMobileParams) ToParams() string {
 	data.Set("BODY", chargeParams.Body)
 	if strings.ToUpper(chargeParams.Dummy) == "YES" {
 		data.Set("DUMMY", "yes")
+	}
+	if strings.ToUpper(chargeParams.SmsFallback) == "YES" {
+		data.Set("smsfallback", "yes")
 	}
 	return data.Encode()
 }

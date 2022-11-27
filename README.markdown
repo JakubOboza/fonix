@@ -150,7 +150,7 @@ CLI Client:
 - [x] - fonix sendbinsms 
 - [x] - fonix sendwappush 
 - [x] - fonix operator_lookup
-- [ ] - fonix chargemobile
+- [x] - fonix chargemobile
 - [x] - fonix refund
 
 # Build <a name="build"></a>
