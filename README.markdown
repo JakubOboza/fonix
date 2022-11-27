@@ -125,6 +125,17 @@ Each other param can be checked by doing
 ./fonix sendsms --help
 ```
 
+For dummy billing (mock api request) you use `--dummy=yes`
+
+example:
+```
+API_KEY=live_xyz ./fonix sendsms -b test -n 447111222333 -o 84988 -d yes
+or
+API_KEY=live_xyz ./fonix sendsms --=body test --numbers=447111222333 --ooriginator=84988 --dummy=yes
+```
+
+To check cli client version just do `./fonix version`
+
 
 # Compatibility Status <a name="status"></a>
 
