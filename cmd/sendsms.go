@@ -16,12 +16,12 @@ import (
 var sendsmsCmd = &cobra.Command{
 	Use:   "sendsms",
 	Short: "send sms via fonix from command line",
-	Long: `Use this subcommand to send bulk/free sms to a number 
+	Long: `Use this subcommand to send bulk/free sms to a number
 	using your API keys via fonix gateway`,
 	Run: func(cmd *cobra.Command, args []string) {
 		apiKey := os.Getenv("API_KEY")
 
-		flagApiKey, err := cmd.Flags().GetString("url")
+		flagApiKey, err := cmd.Flags().GetString("apikey")
 		if err == nil && flagApiKey != "" {
 			apiKey = flagApiKey
 		}

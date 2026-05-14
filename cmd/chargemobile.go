@@ -16,13 +16,13 @@ import (
 var chargemobileCmd = &cobra.Command{
 	Use:   "chargemobile",
 	Short: "charge mobile number",
-	Long: `charge mobile number from command line. 
+	Long: `charge mobile number from command line.
 	This method call charges the mobile phone account of one or many phone numbers.
 	The charge is only ever attempted once. If unsuccessful we do not re-attempt to charge in the same request unless you specify smsfallback=yes, in which case the charge is attempted again through premium SMS.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		apiKey := os.Getenv("API_KEY")
 
-		flagApiKey, err := cmd.Flags().GetString("url")
+		flagApiKey, err := cmd.Flags().GetString("apikey")
 		if err == nil && flagApiKey != "" {
 			apiKey = flagApiKey
 		}

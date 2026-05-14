@@ -20,7 +20,7 @@ var operatorlookupCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		apiKey := os.Getenv("API_KEY")
 
-		flagApiKey, err := cmd.Flags().GetString("url")
+		flagApiKey, err := cmd.Flags().GetString("apikey")
 		if err == nil && flagApiKey != "" {
 			apiKey = flagApiKey
 		}
