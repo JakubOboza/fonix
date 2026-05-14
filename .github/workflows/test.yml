@@ -4,11 +4,21 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: [ '1.14', '1.15', '1.16', '1.17', '1.18', '1.19', '1.22.8', '1.23.2' ]
+        go-version:
+          [
+            "1.14",
+            "1.15",
+            "1.16",
+            "1.17",
+            "1.18",
+            "1.19",
+            "1.22.8",
+            "1.23.2",
+            "1.26.0",
+          ]
 
     steps:
       - uses: actions/checkout@v3
@@ -19,6 +29,6 @@ jobs:
       - name: Install dependencies
         run: go get .
       - name: Build
-        run: make         
+        run: make
       - name: Test with Go
         run: make test
